@@ -8,3 +8,35 @@ body,
 html {
   height: 100%;
 }
+
+
+
+.legend {
+  padding: 10px;
+  font-family: Sanchez, serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 18px;
+  background-color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend .one {
+  color: #99FF00;
+}
+.legend .two {
+  color: #FFFF33;
+}
+.legend .three {
+  color: #FFCC00;
+}
+.legend .four {
+  color: #FF9900;
+}
+.legend .five {
+  color: #FF6600;
+}
+.legend .six {
+  color: #FF0000;
+}

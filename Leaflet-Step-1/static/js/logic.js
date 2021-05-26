@@ -12,6 +12,18 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     id: "mapbox/streets-v11",
     accessToken: API_KEY
 }).addTo(myMap);
+
+var info = L.control({
+    position: "bottomleft"
+});
+
+info.onAdd = function() {
+    var div = L.DomUtil.create("div", "legend");
+    return div;
+};
+
+// Add the info legend to the map
+info.addTo(myMap);
   
 var eQuake_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
@@ -57,7 +69,17 @@ d3.json(eQuake_url).then(function(response) {
             radius: location.properties.mag *15000
         }).bindPopup(`<h3> Type: ${location.properties.type} <hr> Place: ${location.properties.place}<br> Magnitude: ${location.properties.mag}<br> Depth: ${location.geometry.coordinates[2]}</h3>`).addTo(myMap);
         }
+        document.querySelector(".legend").innerHTML = [
+            "<p class='one'>Depth: -10 - 9</p>",
+            "<p class='two'>Depth: 10 - 29</p>",
+            "<p class='three'>Depth: 30 - 49</p>",
+            "<p class='four'>Depth: 50 - 69</p>",
+            "<p class='five'>Depth: 70 - 89</p>",
+            "<p class='six'>Depth: 90+</p>"
+          ].join("");
     }
+    
 
 });
   
+
