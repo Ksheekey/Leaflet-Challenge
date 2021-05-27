@@ -86,7 +86,7 @@ d3.json(eQuake_url).then(function(response) {
             "<p class='six'>Depth: 90+</p>"
           ].join("");
     }
-    //console.log(quakes[0]._latlng.lat)
+    
 
 });
 
