@@ -34,7 +34,6 @@ d3.json(eQuake_url).then(function(response) {
     for (var i = 0; i < response.features.length; i++) {
         var location = response.features[i];
 
-        // Conditionals for countries points
         var color = "";
         if (location.geometry.coordinates[2] >= -10 && location.geometry.coordinates[2] < 10) {
             color = "#99FF00";
@@ -59,18 +58,15 @@ d3.json(eQuake_url).then(function(response) {
         }
 
         if (location) {
-        //L.marker([location.geometry.coordinates[1], location.geometry.coordinates[0]]).addTo(myMap);
         L.circle([location.geometry.coordinates[1], location.geometry.coordinates[0]], {
             fillOpacity: 0.9,
             color: "black",
             weight: 1,
             fillColor: color,
-            // Adjust radius
             radius: location.properties.mag *15000
         }).bindPopup(`<h3> Type: ${location.properties.type} <hr> Place: ${location.properties.place}<br> Magnitude: ${location.properties.mag}<br> Depth: ${location.geometry.coordinates[2]}</h3>`).addTo(myMap);
         }
         document.querySelector(".legend").innerHTML = [
-            //"<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
             "<p class='one'>Depth: -10 - 9</p>",
             "<p class='two'>Depth: 10 - 29</p>",
             "<p class='three'>Depth: 30 - 49</p>",
