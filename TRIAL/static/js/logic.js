@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
     center: [40.7608, -111.8910],
-    zoom: 5
+    zoom: 1
 });
 
   
@@ -38,7 +38,7 @@ var eQuake_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_
 
 d3.json(eQuake_url).then(function(response) {
 
-    console.log(response.features);
+    //console.log(response.features);
     var quakes = []
 
     for (var i = 0; i < response.features.length; i++) {
@@ -101,32 +101,33 @@ var baseMaps = {
 
 L.control.layers(baseMaps).addTo(myMap);
 
-var plates_url = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
+var plates_url = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 
 d3.json(plates_url).then(function(response) {
 
-    //console.log(response.features);
+    console.log(response.features.length);
     var lines = []
 
-    // for (var k = 0; k<response.features.length; k++) {
-    //     var location = response.features[0];
-    // }
-    var wow = response.features[0].geometry.coordinates[0]
-    for (var i = 0; i<wow.length;i++) {
-        console.log(wow[i])
+    var wow = response.features[0].geometry.coordinates[0][0]
+    console.log(wow)
+    //wow.forEach(d=>lines.push(d))
+    
+
+    for (var t = 0;t<response.features.length;t++) {
+        lines.push([response.features[t].geometry.coordinates[0][0],response.features[t].geometry.coordinates[0][1]])
     }
 
+    
+    console.log(lines)
 
-    // var line = [
-    // [43.6150, -116.2023],
-    // [39.7392, -104.9903],
-    // [40.7608, -111.8910]
-    // ];
+    var line = [
+    lines
+    ];
 
-    // //POLYLINE
-    // L.polyline(line, {
-    // color: "red"
-    // }).addTo(myMap);
+    //POLYLINE
+    L.polyline(line, {
+    color: "grey"
+    }).addTo(myMap);
 
 });
 
