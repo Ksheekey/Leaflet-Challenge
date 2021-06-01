@@ -1,3 +1,4 @@
+//setting map
 var myMap = L.map("map", {
     center: [40.7608, -111.8910],
     zoom: 5
@@ -25,15 +26,19 @@ info.onAdd = function() {
 // Add the info legend to the map
 info.addTo(myMap);
   
+//putting site into a variable to call
 var eQuake_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
+//reading json
 d3.json(eQuake_url).then(function(response) {
 
-    console.log(response.features);
+    //console.log(response.features);
 
+    //loop through the data
     for (var i = 0; i < response.features.length; i++) {
         var location = response.features[i];
 
+        //append colors to cooresponding info
         var color = "";
         if (location.geometry.coordinates[2] >= -10 && location.geometry.coordinates[2] < 10) {
             color = "#99FF00";
@@ -57,6 +62,7 @@ d3.json(eQuake_url).then(function(response) {
             color = "black";
         }
 
+        //setting points and popup info
         if (location) {
         L.circle([location.geometry.coordinates[1], location.geometry.coordinates[0]], {
             fillOpacity: 0.9,
@@ -66,6 +72,8 @@ d3.json(eQuake_url).then(function(response) {
             radius: location.properties.mag *15000
         }).bindPopup(`<h3> Type: ${location.properties.type} <hr> Place: ${location.properties.place}<br> Magnitude: ${location.properties.mag}<br> Depth: ${location.geometry.coordinates[2]}</h3>`).addTo(myMap);
         }
+        
+        //legend
         document.querySelector(".legend").innerHTML = [
             "<p class='one'>Depth: -10 - 9</p>",
             "<p class='two'>Depth: 10 - 29</p>",
