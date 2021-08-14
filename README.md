@@ -1,9 +1,6 @@
 # Leaflet-Challenge
-leaflet hw
 
-here is my hw submission for the leaflet challenge!
-
-In this challenge I set the points of the last 7 days of earthquakes.
+Here I set the points of the last 7 days of earthquakes.
 
 the circles on the map show where the quake happened
 
